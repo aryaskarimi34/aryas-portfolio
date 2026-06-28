@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Aryas Karimi — Data Analyst Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --dark:#0D1B2A; --panel:#162032; --blue:#1A5276; --mid:#2E86C1;
+      --light:#AED6F1; --accent:#F39C12; --green:#27AE60; --red:#E74C3C;
+      --muted:#8DA9C4; --white:#F0F4F8; --bg:#F4F8FD; --border:#D6E4F0;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:#1C2833;line-height:1.6}
+
+    /* NAV */
+    nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(13,27,42,0.97);
+        backdrop-filter:blur(12px);border-bottom:1px solid #1E2D40;
+        padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:60px}
+    .logo{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;
+          color:var(--white);letter-spacing:-0.02em}
+    .logo span{color:var(--mid)}
+    nav ul{list-style:none;display:flex;gap:2rem}
+    nav ul a{text-decoration:none;font-size:0.85rem;font-weight:500;color:var(--muted);transition:color .2s}
+    nav ul a:hover{color:var(--white)}
+    .nav-cta{background:var(--mid);color:#fff!important;padding:.35rem .9rem;border-radius:6px;font-weight:600!important}
+    .nav-cta:hover{background:#1A5276!important}
+
+    /* HERO */
+    .hero{min-height:100vh;display:flex;align-items:center;
+          background:linear-gradient(160deg,var(--dark) 0%,#0f2236 50%,#0a1a2e 100%);
+          padding:80px 5% 60px;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;
+        background:radial-gradient(ellipse at 70% 50%, rgba(46,134,193,0.08) 0%, transparent 60%)}
+    .hero-inner{max-width:1100px;margin:0 auto;display:grid;
+                grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative}
+    .hero-badge{display:inline-flex;align-items:center;gap:.5rem;
+                background:rgba(46,134,193,0.15);border:1px solid rgba(46,134,193,0.3);
+                color:var(--mid);font-size:.75rem;font-weight:600;padding:5px 14px;
+                border-radius:20px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:1.2rem}
+    .badge-dot{width:6px;height:6px;border-radius:50%;background:var(--green);
+               animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+    .hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.2rem,5vw,3.5rem);
+             font-weight:700;line-height:1.1;color:var(--white);letter-spacing:-.03em;margin-bottom:1rem}
+    .hero h1 em{color:var(--mid);font-style:normal}
+    .hero-sub{font-size:1rem;color:var(--muted);margin-bottom:2rem;max-width:480px;line-height:1.7}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:.4rem;padding:.65rem 1.4rem;
+         border-radius:8px;font-size:.9rem;font-weight:600;text-decoration:none;transition:all .2s}
+    .btn-primary{background:var(--mid);color:#fff}
+    .btn-primary:hover{background:#1A5276;transform:translateY(-2px);box-shadow:0 8px 24px rgba(46,134,193,.3)}
+    .btn-ghost{background:rgba(255,255,255,.06);color:var(--white);border:1px solid rgba(255,255,255,.15)}
+    .btn-ghost:hover{background:rgba(255,255,255,.12)}
+
+    /* Hero stats */
+    .hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+    .stat-card{background:rgba(22,32,50,0.9);border:1px solid #1E2D40;border-radius:14px;
+               padding:1.25rem 1.4rem;transition:border-color .2s,transform .2s}
+    .stat-card:hover{border-color:var(--mid);transform:translateY(-3px)}
+    .stat-card.wide{grid-column:span 2;border-color:rgba(46,134,193,.3)}
+    .stat-icon{font-size:1.3rem;margin-bottom:.4rem}
+    .stat-num{font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:700;color:var(--white)}
+    .stat-card.wide .stat-num{font-size:1.9rem;color:var(--mid)}
+    .stat-lbl{font-size:.78rem;color:var(--muted);margin-top:.15rem}
+
+    /* SECTION BASE */
+    section{padding:90px 5%}
+    .section-inner{max-width:1180px;margin:0 auto}
+    .section-eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+                     color:var(--mid);margin-bottom:.5rem}
+    .section-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,3vw,2.2rem);
+                   font-weight:700;color:var(--blue);letter-spacing:-.02em;margin-bottom:.6rem}
+    .section-desc{color:#566573;max-width:580px;margin-bottom:3rem;font-size:.95rem}
+
+    /* WHY HIRE ME — top callout */
+    .why-section{background:var(--dark);padding:60px 5%}
+    .why-inner{max-width:1180px;margin:0 auto}
+    .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
+    .why-card{background:#162032;border:1px solid #1E2D40;border-radius:14px;
+              padding:1.5rem;border-top:3px solid var(--mid)}
+    .why-card h3{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;
+                 color:var(--white);margin-bottom:.5rem}
+    .why-card p{font-size:.85rem;color:var(--muted);line-height:1.6}
+    .why-eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+                 color:var(--mid)}
+    .why-title{font-family:'Space Grotesk',sans-serif;font-size:1.7rem;font-weight:700;
+               color:var(--white);margin:.5rem 0}
+
+    /* SKILLS */
+    #skills{background:#fff}
+    .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:.85rem}
+    .skill-item{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;
+                padding:.85rem 1.1rem;display:flex;align-items:center;gap:.65rem;
+                font-size:.875rem;font-weight:500;color:#1C2833;transition:all .2s}
+    .skill-item:hover{border-color:var(--mid);background:#EBF5FB;transform:translateY(-2px)}
+    .skill-dot{width:7px;height:7px;border-radius:50%;background:var(--mid);flex-shrink:0}
+
+    /* PROJECTS */
+    #projects{background:var(--bg)}
+    .project-block{margin-bottom:5rem}
+    .project-block:last-child{margin-bottom:0}
+    .project-meta{display:flex;align-items:flex-start;justify-content:space-between;
+                  flex-wrap:wrap;gap:1.5rem;margin-bottom:1.5rem}
+    .project-info{max-width:580px}
+    .project-num{font-family:'Space Grotesk',sans-serif;font-size:.72rem;font-weight:700;
+                 letter-spacing:.12em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+    .project-title{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;
+                   color:var(--blue);margin-bottom:.6rem}
+    .project-desc{font-size:.9rem;color:#566573;line-height:1.7;margin-bottom:1rem}
+    .project-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+    .tag{font-size:.72rem;font-weight:600;padding:3px 11px;border-radius:20px;
+         background:var(--light);color:var(--blue)}
+    .project-links{display:flex;gap:.75rem}
+    .plink{font-size:.82rem;font-weight:600;text-decoration:none;color:var(--mid);
+           border:1.5px solid var(--border);padding:.35rem .9rem;border-radius:6px;transition:all .2s}
+    .plink:hover{border-color:var(--mid);background:var(--light)}
+    .plink.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+    .plink.primary:hover{background:var(--mid);border-color:var(--mid)}
+
+    /* Dashboard image frame */
+    .dashboard-frame{border-radius:16px;overflow:hidden;
+                     box-shadow:0 20px 60px rgba(26,82,118,.18),0 4px 16px rgba(0,0,0,.1);
+                     border:1px solid var(--border);background:var(--dark);cursor:pointer;
+                     transition:transform .3s,box-shadow .3s}
+    .dashboard-frame:hover{transform:translateY(-4px) scale(1.005);
+                            box-shadow:0 28px 70px rgba(26,82,118,.25)}
+    .dashboard-frame img{width:100%;display:block}
+    .frame-label{background:var(--dark);padding:.6rem 1rem;
+                 display:flex;align-items:center;justify-content:space-between}
+    .frame-dot-row{display:flex;gap:.4rem}
+    .frame-dot{width:10px;height:10px;border-radius:50%}
+    .frame-caption{font-size:.75rem;color:var(--muted);font-family:monospace}
+
+    /* Divider */
+    .project-divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);
+                     margin:5rem 0}
+
+    /* POWERBI CALLOUT */
+    .streamlit-btn{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,#FF4B4B,#cc3333);
+      color:#fff;font-size:.82rem;font-weight:700;padding:.45rem 1.1rem;border-radius:8px;
+      text-decoration:none;transition:all .2s;border:none;cursor:pointer;letter-spacing:.01em}
+    .streamlit-btn:hover{background:linear-gradient(135deg,#ff6b6b,#e63535);transform:translateY(-2px);
+      box-shadow:0 6px 20px rgba(255,75,75,.35)}
+    .streamlit-btn svg{width:16px;height:16px;flex-shrink:0}
+    .streamlit-tag{display:inline-flex;align-items:center;gap:.3rem;background:rgba(255,75,75,.12);
+      border:1px solid rgba(255,75,75,.3);color:#FF4B4B;font-size:.72rem;font-weight:600;
+      padding:2px 9px;border-radius:20px;letter-spacing:.04em;text-transform:uppercase}
+    .powerbi-note{background:linear-gradient(135deg,#2C3E50,#1a2a3a);border:1px solid #2E86C1;
+                  border-radius:12px;padding:1.25rem 1.5rem;margin-top:1.5rem;
+                  display:flex;align-items:center;gap:1rem}
+    .powerbi-note .pbi-icon{font-size:1.6rem;flex-shrink:0}
+    .powerbi-note p{font-size:.85rem;color:var(--muted);line-height:1.6}
+    .powerbi-note strong{color:var(--white)}
+
+    /* EXPERIENCE */
+    #experience{background:#fff}
+    .exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+    .timeline{border-left:2px solid var(--border);padding-left:1.75rem}
+    .tl-item{position:relative;margin-bottom:2.2rem}
+    .tl-item::before{content:'';position:absolute;left:-2.4rem;top:5px;width:13px;height:13px;
+                     border-radius:50%;background:var(--mid);border:3px solid #fff;
+                     box-shadow:0 0 0 2px var(--mid)}
+    .tl-date{font-size:.74rem;font-weight:700;color:var(--mid);text-transform:uppercase;
+             letter-spacing:.08em;margin-bottom:.25rem}
+    .tl-role{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1rem;color:var(--blue)}
+    .tl-company{font-size:.875rem;color:#566573;margin-bottom:.5rem}
+    .tl-bullets{list-style:none}
+    .tl-bullets li{font-size:.85rem;color:#1C2833;padding:.18rem 0 .18rem 1rem;position:relative}
+    .tl-bullets li::before{content:'→';position:absolute;left:0;color:var(--mid);font-size:.78rem}
+    .edu-card{background:var(--bg);border-radius:12px;padding:1.25rem 1.5rem;
+              border:1px solid var(--border);margin-bottom:1rem}
+    .edu-deg{font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--blue);margin-bottom:.25rem}
+    .edu-uni{font-size:.875rem;color:#566573;margin-bottom:.4rem}
+    .edu-detail{font-size:.825rem;color:#566573}
+
+    /* CONTACT */
+    #contact{background:var(--dark);text-align:center;padding:90px 5%}
+    .contact-inner{max-width:600px;margin:0 auto}
+    #contact .section-title{color:var(--white)}
+    #contact .section-desc{color:var(--muted);margin:0 auto 2.5rem}
+    .contact-links{display:flex;justify-content:center;flex-wrap:wrap;gap:1rem}
+    .clink{display:inline-flex;align-items:center;gap:.5rem;color:var(--white);
+           text-decoration:none;background:rgba(255,255,255,.06);
+           border:1px solid rgba(255,255,255,.12);padding:.65rem 1.3rem;
+           border-radius:8px;font-size:.875rem;font-weight:500;transition:background .2s}
+    .clink:hover{background:rgba(255,255,255,.14)}
+
+    footer{background:#070f1a;color:#3D5A6E;text-align:center;padding:1.25rem;font-size:.8rem}
+
+    /* Lightbox */
+    .lightbox{display:none;position:fixed;inset:0;z-index:999;
+              background:rgba(0,0,0,.9);align-items:center;justify-content:center;padding:2%}
+    .lightbox.active{display:flex}
+    .lightbox img{max-width:100%;max-height:90vh;border-radius:8px;object-fit:contain}
+    .lightbox-close{position:absolute;top:1.5rem;right:1.5rem;color:#fff;font-size:2rem;
+                    cursor:pointer;line-height:1;background:none;border:none}
+
+    @media(max-width:900px){
+      .hero-inner,.exp-grid{grid-template-columns:1fr}
+      .hero-stats,.why-grid{grid-template-columns:1fr 1fr}
+      .hero-stats .stat-card.wide,.why-grid .why-card:last-child{grid-column:span 2}
+    }
+    @media(max-width:600px){nav ul{display:none}.hero-stats{display:none}}
+  </style>
+</head>
+<body>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="Dashboard full view"/>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Aryas <span>Karimi</span></div>
+  <ul>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact" class="nav-cta">Hire Me</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge"><span class="badge-dot"></span> Open to work · Birmingham & Remote</div>
+      <h1>Junior Data Analyst<br/>turning raw data into <em>clear decisions</em></h1>
+      <p class="hero-sub">MSc AI graduate with 4+ years of Python & SQL experience. I build dashboards, ML pipelines and data stories that help businesses act on evidence — not instinct.</p>
+      <div class="hero-btns">
+        <a href="Aryas_Karimi_Data_Analyst_CV.docx" download class="btn btn-primary">⬇ Download CV</a>
+        <a href="#projects" class="btn btn-ghost">See My Work ↓</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card wide">
+        <div class="stat-icon">🎓</div>
+        <div class="stat-num">MSc Artificial Intelligence</div>
+        <div class="stat-lbl">Birmingham City University · 2024</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🐍</div>
+        <div class="stat-num">4+</div>
+        <div class="stat-lbl">Years Python</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🗄️</div>
+        <div class="stat-num">SQL</div>
+        <div class="stat-lbl">PostgreSQL · SQLite</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📊</div>
+        <div class="stat-num">Power BI</div>
+        <div class="stat-lbl">Dashboards & BI</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🤖</div>
+        <div class="stat-num">ML</div>
+        <div class="stat-lbl">Scikit-learn · Pandas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY HIRE ME -->
+<div class="why-section">
+  <div class="why-inner">
+    <p class="why-eyebrow">Why hire me?</p>
+    <h2 class="why-title">I don't just analyse — I communicate findings</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <h3>🔧 Full Pipeline Ownership</h3>
+        <p>I handle every step — data ingestion, cleaning, SQL queries, analysis and final visualisation. No hand-holding needed.</p>
+      </div>
+      <div class="why-card">
+        <h3>📊 Business-first thinking</h3>
+        <p>Every chart I build answers a real question. I translate technical findings into plain language recommendations that stakeholders can act on.</p>
+      </div>
+      <div class="why-card">
+        <h3>💡 MSc AI + hands-on Python</h3>
+        <p>Strong statistical foundation from my MSc combined with 4+ years of professional Python development — rare at junior level.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <p class="section-eyebrow">Portfolio</p>
+    <h2 class="section-title">3 Real Data Projects</h2>
+    <p class="section-desc">Each project is fully coded with Python, produces a working dashboard, and comes with an Excel file ready to import into Power BI. Click any dashboard to expand it.</p>
+
+    <!-- PROJECT 1 -->
+    <div class="project-block">
+      <div class="project-meta">
+        <div class="project-info">
+          <p class="project-num">Project 01</p>
+          <h3 class="project-title">&#128202; Retail Sales Dashboard</h3>
+          <p class="project-desc">Interactive Streamlit dashboard on ONS-calibrated UK retail data. Filter by region, category and month range to explore £M revenue trends, profit margins, category splits and a region × category heatmap — all live in the browser.</p>
+          <div class="project-tags">
+            <span class="tag">Python</span><span class="tag">Streamlit</span>
+            <span class="tag">Pandas</span><span class="tag">ONS Data</span>
+            <span class="tag">EDA</span><span class="tag">SQLite</span>
+          </div>
+          <div style="margin-bottom:.6rem"><span class="streamlit-tag">&#9889; Live App</span></div>
+          <div class="project-links" style="flex-wrap:wrap;gap:.6rem">
+            <a href="https://retaildataanalyser.streamlit.app/" target="_blank" class="streamlit-btn">&#9654; Launch Live App</a>
+            <a href="projects/01_retail_sales_dashboard/retail_dashboard.py" class="plink primary">View Code</a>
+            <a href="projects/01_retail_sales_dashboard/retail_data.xlsx" class="plink">&#8595; Data</a>
+          </div>
+          <div class="powerbi-note" style="margin-top:.8rem">
+            <span class="pbi-icon">&#128640;</span>
+            <p><strong>Streamlit App:</strong> Filter by region, category and month. KPI cards, trend charts, heatmap and CSV export. <em>Deploy: push <code>project1_retail/</code> to GitHub &rarr; share.streamlit.io</em></p>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-frame" onclick="openLightbox('assets/retail_dashboard.png')">
+        <div class="frame-label">
+          <div class="frame-dot-row">
+            <div class="frame-dot" style="background:#E74C3C"></div>
+            <div class="frame-dot" style="background:#F39C12"></div>
+            <div class="frame-dot" style="background:#27AE60"></div>
+          </div>
+          <span class="frame-caption">retail_sales_dashboard.py  •  click to expand</span>
+        </div>
+        <img src="assets/retail_dashboard.png" alt="Retail Sales Dashboard"/>
+      </div>
+    </div>
+
+    <div class="project-divider"></div>
+
+    <!-- PROJECT 2 -->
+    <div class="project-block">
+      <div class="project-meta">
+        <div class="project-info">
+          <p class="project-num">Project 02</p>
+          <h3 class="project-title">&#128269; Customer Churn Prediction</h3>
+          <p class="project-desc">End-to-end ML pipeline on 7,043 IBM Telco-structured customers. EDA tab reveals churn drivers; Model tab shows Random Forest (AUC 0.82) vs Logistic Regression; Risk Scorer tab lets you enter any customer profile and get an instant churn probability with retention recommendations.</p>
+          <div class="project-tags">
+            <span class="tag">Python</span><span class="tag">Streamlit</span>
+            <span class="tag">Scikit-learn</span><span class="tag">Random Forest</span>
+            <span class="tag">EDA</span><span class="tag">ML Pipeline</span>
+          </div>
+          <div style="margin-bottom:.6rem"><span class="streamlit-tag">&#9889; Live App</span></div>
+          <div class="project-links" style="flex-wrap:wrap;gap:.6rem">
+            <a href="https://churn-project-app.streamlit.app/" target="_blank" class="streamlit-btn">&#9654; Launch Live App</a>
+            <a href="projects/02_customer_churn_analysis/churn_dashboard.py" class="plink primary">View Code</a>
+            <a href="projects/02_customer_churn_analysis/churn_data.xlsx" class="plink">&#8595; Data</a>
+          </div>
+          <div class="powerbi-note" style="margin-top:.8rem">
+            <span class="pbi-icon">&#128640;</span>
+            <p><strong>Streamlit App:</strong> 3 tabs: EDA, Model Performance, Live Risk Scorer. Enter a customer profile to get real-time churn probability + retention advice. <em>Deploy: push <code>project2_churn/</code> to GitHub &rarr; share.streamlit.io</em></p>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-frame" onclick="openLightbox('assets/churn_dashboard.png')">
+        <div class="frame-label">
+          <div class="frame-dot-row">
+            <div class="frame-dot" style="background:#E74C3C"></div>
+            <div class="frame-dot" style="background:#F39C12"></div>
+            <div class="frame-dot" style="background:#27AE60"></div>
+          </div>
+          <span class="frame-caption">customer_churn_dashboard.py  •  click to expand</span>
+        </div>
+        <img src="assets/churn_dashboard.png" alt="Customer Churn Dashboard"/>
+      </div>
+    </div>
+
+    <div class="project-divider"></div>
+
+    <!-- PROJECT 3 -->
+    <div class="project-block">
+      <div class="project-meta">
+        <div class="project-info">
+          <p class="project-num">Project 03</p>
+          <h3 class="project-title">&#127968; UK Housing Price Analysis</h3>
+          <p class="project-desc">10-year ONS HPI regional analysis (2015–2024) across 10 regions and 4 property types. Interactive filters reveal the 2021–22 post-COVID surge, 2023 rate-rise correction, regional price premiums and transaction volumes — with a YoY growth heatmap and CSV export.</p>
+          <div class="project-tags">
+            <span class="tag">Python</span><span class="tag">Streamlit</span>
+            <span class="tag">Pandas</span><span class="tag">Time Series</span>
+            <span class="tag">ONS Data</span><span class="tag">Regional Analysis</span>
+          </div>
+          <div style="margin-bottom:.6rem"><span class="streamlit-tag">&#9889; Live App</span></div>
+          <div class="project-links" style="flex-wrap:wrap;gap:.6rem">
+            <a href="https://aryas-housing-dashboard.streamlit.app" target="_blank" class="streamlit-btn">&#9654; Launch Live App</a>
+            <a href="projects/03_uk_housing_analysis/housing_dashboard.py" class="plink primary">View Code</a>
+            <a href="projects/03_uk_housing_analysis/housing_data.xlsx" class="plink">&#8595; Data</a>
+          </div>
+          <div class="powerbi-note" style="margin-top:.8rem">
+            <span class="pbi-icon">&#128640;</span>
+            <p><strong>Streamlit App:</strong> Filter region, property type, year range. Price trends, regional heatmap, YoY growth table, transaction volumes. <em>Deploy: push <code>project3_housing/</code> to GitHub &rarr; share.streamlit.io</em></p>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-frame" onclick="openLightbox('assets/housing_dashboard.png')">
+        <div class="frame-label">
+          <div class="frame-dot-row">
+            <div class="frame-dot" style="background:#E74C3C"></div>
+            <div class="frame-dot" style="background:#F39C12"></div>
+            <div class="frame-dot" style="background:#27AE60"></div>
+          </div>
+          <span class="frame-caption">uk_housing_analysis.py  •  click to expand</span>
+        </div>
+        <img src="assets/housing_dashboard.png" alt="UK Housing Dashboard"/>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <p class="section-eyebrow">Technical Toolkit</p>
+    <h2 class="section-title">Core Skills</h2>
+    <p class="section-desc">The tools I use daily to collect, clean, model and present data.</p>
+    <div class="skills-grid">
+      <div class="skill-item"><span class="skill-dot"></span>Python · Pandas · NumPy</div>
+      <div class="skill-item"><span class="skill-dot"></span>SQL · PostgreSQL · SQLite</div>
+      <div class="skill-item"><span class="skill-dot"></span>Streamlit · Interactive Dashboards</div>
+      <div class="skill-item"><span class="skill-dot"></span>Power BI · Data Visualisation</div>
+      <div class="skill-item"><span class="skill-dot"></span>Matplotlib · Seaborn</div>
+      <div class="skill-item"><span class="skill-dot"></span>Machine Learning (Scikit-learn)</div>
+      <div class="skill-item"><span class="skill-dot"></span>ETL & Data Pipelines</div>
+      <div class="skill-item"><span class="skill-dot"></span>Data Cleaning & Wrangling</div>
+      <div class="skill-item"><span class="skill-dot"></span>Statistical Analysis</div>
+      <div class="skill-item"><span class="skill-dot"></span>Microsoft Excel (Advanced)</div>
+      <div class="skill-item"><span class="skill-dot"></span>Git & GitHub</div>
+      <div class="skill-item"><span class="skill-dot"></span>REST APIs & Web Data</div>
+      <div class="skill-item"><span class="skill-dot"></span>Jupyter Notebooks</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <p class="section-eyebrow">Background</p>
+    <h2 class="section-title">Experience & Education</h2>
+    <div class="exp-grid">
+      <div>
+        <h3 style="font-family:'Space Grotesk',sans-serif;color:var(--blue);margin-bottom:1.5rem;font-size:1.05rem">Professional Experience</h3>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-date">2021 – 2023</div>
+            <div class="tl-role">Freelance AI & Python Developer</div>
+            <div class="tl-company">Self-employed</div>
+            <ul class="tl-bullets">
+              <li>Built ETL pipelines and analytical models for finance, logistics and e-commerce clients</li>
+              <li>Delivered NLP and recommendation systems from real-world datasets</li>
+              <li>Produced API-driven data integrations and automated reporting workflows</li>
+            </ul>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">2019 – 2021</div>
+            <div class="tl-role">Django Backend Developer</div>
+            <div class="tl-company">Ainfluencer</div>
+            <ul class="tl-bullets">
+              <li>Processed user behaviour and engagement data for analytics features</li>
+              <li>Optimised PostgreSQL queries — reduced query times by up to 40%</li>
+              <li>Designed schemas and improved data retrieval architecture</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-family:'Space Grotesk',sans-serif;color:var(--blue);margin-bottom:1.5rem;font-size:1.05rem">Education</h3>
+        <div class="edu-card">
+          <div class="edu-deg">MSc Artificial Intelligence</div>
+          <div class="edu-uni">Birmingham City University · 2023–2024</div>
+          <div class="edu-detail">Machine Learning, Data Mining, Neural Networks, Statistical Modelling<br/>Dissertation: Time-series prediction with LSTM networks</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-deg">BSc Computer Engineering</div>
+          <div class="edu-uni">University of Kurdistan · 2018–2022</div>
+          <div class="edu-detail">Algorithms, databases, software engineering and data structures</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <p class="section-eyebrow" style="color:var(--muted)">Get In Touch</p>
+    <h2 class="section-title">Available for Junior & Trainee Analyst Roles</h2>
+    <p class="section-desc">Looking for hybrid or remote positions across the UK in data analysis, BI, reporting, or data engineering support roles.</p>
+    <div class="contact-links">
+      <a href="mailto:aryas1378@gmail.com" class="clink">✉ aryas1378@gmail.com</a>
+      <a href="https://linkedin.com/in/aryas-karimi-a80a161a5" target="_blank" class="clink">🔗 LinkedIn</a>
+      <a href="https://github.com/aryas-karimi" target="_blank" class="clink">💻 GitHub</a>
+      <a href="Aryas_Karimi_Data_Analyst_CV.docx" download class="clink">⬇ Download CV</a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2025 Aryas Karimi · Portfolio · Birmingham, UK · Open to work</footer>
+
+<script>
+function openLightbox(src){
+  document.getElementById('lightbox-img').src=src;
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox()});
+</script>
+</body>
+</html>
